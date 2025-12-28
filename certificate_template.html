@@ -1,1 +1,154 @@
-
+<!-- certificate_template.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>SPS ASEAN Training Program Certificate</title>
+    <style>
+        body {
+            font-family: 'Times New Roman', serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .certificate {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px;
+            background-color: white;
+            border: 15px solid #0d47a1;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+            position: relative;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        .header h1 {
+            color: #0d47a1;
+            font-size: 36px;
+            margin-bottom: 10px;
+        }
+        .header h2 {
+            color: #1565c0;
+            font-size: 24px;
+            margin-top: 0;
+        }
+        .content {
+            text-align: center;
+            margin: 40px 0;
+        }
+        .content h3 {
+            font-size: 28px;
+            color: #333;
+            margin-bottom: 30px;
+        }
+        .name {
+            font-size: 32px;
+            font-weight: bold;
+            color: #0d47a1;
+            margin: 20px 0;
+            padding: 10px;
+            border-bottom: 2px solid #0d47a1;
+            display: inline-block;
+        }
+        .details {
+            font-size: 18px;
+            line-height: 1.6;
+            margin: 30px 0;
+        }
+        .score {
+            font-size: 20px;
+            font-weight: bold;
+            color: #2e7d32;
+            margin: 20px 0;
+        }
+        .footer {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 2px solid #ccc;
+            display: flex;
+            justify-content: space-between;
+        }
+        .signature {
+            text-align: center;
+            width: 45%;
+        }
+        .signature-line {
+            border-top: 1px solid #333;
+            width: 200px;
+            margin: 20px auto;
+        }
+        .date {
+            font-size: 16px;
+            color: #666;
+        }
+        .logo {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .stamp {
+            position: absolute;
+            bottom: 40px;
+            right: 40px;
+            opacity: 0.7;
+        }
+    </style>
+</head>
+<body>
+    <div class="certificate">
+        <div class="logo">
+            <h1 style="color: #0d47a1;">SPS</h1>
+            <h2 style="color: #1565c0;">ASEAN Training Program</h2>
+        </div>
+        
+        <div class="header">
+            <h1>CERTIFICATE OF COMPLETION</h1>
+            <h2>Paragliding Proficiency Assessment</h2>
+        </div>
+        
+        <div class="content">
+            <p>This is to certify that</p>
+            <div class="name">${STUDENT_NAME}</div>
+            <p>has successfully completed the</p>
+            <h3>${PROFICIENCY_LEVEL} Paragliding Quiz</h3>
+            
+            <div class="details">
+                <p>with a score of: <span class="score">${SCORE}%</span></p>
+                <p>Date: ${DATE}</p>
+                <p>Certificate ID: ${CERTIFICATE_ID}</p>
+            </div>
+            
+            <p style="font-style: italic; margin-top: 30px;">
+                This certificate acknowledges the successful demonstration of knowledge 
+                in paragliding safety, techniques, and theory according to 
+                SPS ASEAN Training Program standards.
+            </p>
+        </div>
+        
+        <div class="footer">
+            <div class="signature">
+                <div class="signature-line"></div>
+                <p>Chief Instructor</p>
+                <p>SPS ASEAN Training Program</p>
+            </div>
+            
+            <div class="signature">
+                <div class="signature-line"></div>
+                <p>Program Director</p>
+                <p>Safety & Proficiency Standards</p>
+            </div>
+        </div>
+        
+        <div class="stamp">
+            <div style="border: 2px solid red; border-radius: 50%; width: 120px; height: 120px; 
+                        display: flex; align-items: center; justify-content: center; 
+                        transform: rotate(-15deg);">
+                <div style="text-align: center; font-weight: bold; color: red;">
+                    OFFICIAL<br>SEAL
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
