@@ -1,153 +1,362 @@
-<!-- certificate_template.html -->
+<!-- certificate_template.html - Enhanced Version -->
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="UTF-8">
     <title>SPS ASEAN Training Program Certificate</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Playfair+Display:wght@400;700&display=swap');
+        
         body {
-            font-family: 'Times New Roman', serif;
+            font-family: 'Montserrat', sans-serif;
             margin: 0;
             padding: 20px;
-            background-color: #f5f5f5;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
         }
+        
         .certificate {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 40px;
-            background-color: white;
-            border: 15px solid #0d47a1;
-            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+            width: 900px;
+            background: white;
+            padding: 50px;
+            border-radius: 25px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
             position: relative;
+            overflow: hidden;
+            border: 15px solid #0d47a1;
         }
+        
+        .certificate::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(13, 71, 161, 0.05) 1px, transparent 1px);
+            background-size: 50px 50px;
+            z-index: 0;
+        }
+        
         .header {
             text-align: center;
             margin-bottom: 40px;
+            position: relative;
+            z-index: 1;
         }
-        .header h1 {
-            color: #0d47a1;
-            font-size: 36px;
-            margin-bottom: 10px;
-        }
-        .header h2 {
-            color: #1565c0;
-            font-size: 24px;
-            margin-top: 0;
-        }
-        .content {
-            text-align: center;
-            margin: 40px 0;
-        }
-        .content h3 {
-            font-size: 28px;
-            color: #333;
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
             margin-bottom: 30px;
         }
-        .name {
-            font-size: 32px;
-            font-weight: bold;
+        
+        .logo-icon {
+            font-size: 48px;
             color: #0d47a1;
-            margin: 20px 0;
-            padding: 10px;
-            border-bottom: 2px solid #0d47a1;
+        }
+        
+        .logo-text h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 42px;
+            color: #0d47a1;
+            margin: 0;
+            font-weight: 800;
+            letter-spacing: 2px;
+        }
+        
+        .logo-text h2 {
+            font-size: 18px;
+            color: #1565c0;
+            margin: 5px 0 0 0;
+            font-weight: 600;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+        
+        .certificate-title {
+            font-size: 36px;
+            color: #333;
+            margin: 20px 0 10px 0;
+            font-weight: 700;
+            position: relative;
             display: inline-block;
         }
-        .details {
-            font-size: 18px;
-            line-height: 1.6;
-            margin: 30px 0;
+        
+        .certificate-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 25%;
+            width: 50%;
+            height: 3px;
+            background: linear-gradient(90deg, #0d47a1, #2196f3);
+            border-radius: 2px;
         }
-        .score {
+        
+        .subtitle {
             font-size: 20px;
-            font-weight: bold;
-            color: #2e7d32;
-            margin: 20px 0;
+            color: #666;
+            margin-bottom: 40px;
+            font-weight: 400;
         }
+        
+        .content {
+            text-align: center;
+            margin: 50px 0;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .award-text {
+            font-size: 18px;
+            color: #555;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+        
+        .student-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 48px;
+            color: #0d47a1;
+            margin: 30px 0;
+            padding: 20px;
+            background: linear-gradient(90deg, rgba(13, 71, 161, 0.1), rgba(33, 150, 243, 0.1));
+            border-radius: 15px;
+            display: inline-block;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+        
+        .achievement {
+            font-size: 24px;
+            color: #333;
+            margin: 30px 0;
+            line-height: 1.6;
+        }
+        
+        .level-badge {
+            display: inline-block;
+            background: linear-gradient(45deg, #FF9800, #F57C00);
+            color: white;
+            padding: 10px 30px;
+            border-radius: 25px;
+            font-weight: 700;
+            font-size: 18px;
+            margin: 10px 0;
+            box-shadow: 0 5px 15px rgba(255, 152, 0, 0.3);
+        }
+        
+        .score-display {
+            font-size: 42px;
+            font-weight: 800;
+            color: #4CAF50;
+            margin: 20px 0;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .details {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 15px;
+            margin: 30px 0;
+            display: inline-block;
+            text-align: center;
+        }
+        
+        .detail-item {
+            margin: 10px 0;
+            font-size: 16px;
+            color: #555;
+        }
+        
+        .detail-label {
+            font-weight: 600;
+            color: #333;
+        }
+        
         .footer {
-            margin-top: 40px;
-            padding-top: 20px;
-            border-top: 2px solid #ccc;
+            margin-top: 50px;
+            padding-top: 30px;
+            border-top: 2px solid #e0e0e0;
             display: flex;
             justify-content: space-between;
+            position: relative;
+            z-index: 1;
         }
+        
         .signature {
             text-align: center;
-            width: 45%;
+            width: 40%;
         }
+        
         .signature-line {
-            border-top: 1px solid #333;
             width: 200px;
-            margin: 20px auto;
+            height: 1px;
+            background: #333;
+            margin: 40px auto 10px;
         }
-        .date {
-            font-size: 16px;
+        
+        .signature-name {
+            font-weight: 700;
+            color: #333;
+            margin: 10px 0 5px 0;
+        }
+        
+        .signature-title {
+            font-size: 14px;
             color: #666;
         }
-        .logo {
-            text-align: center;
-            margin-bottom: 20px;
-        }
-        .stamp {
+        
+        .official-stamp {
             position: absolute;
             bottom: 40px;
             right: 40px;
-            opacity: 0.7;
+            width: 150px;
+            height: 150px;
+            border: 3px solid #f44336;
+            border-radius: 50%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            transform: rotate(-15deg);
+            opacity: 0.8;
+        }
+        
+        .stamp-text {
+            text-align: center;
+            font-weight: 700;
+            color: #f44336;
+            font-size: 14px;
+            line-height: 1.4;
+        }
+        
+        .watermark {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(-45deg);
+            font-size: 120px;
+            color: rgba(13, 71, 161, 0.05);
+            font-weight: 900;
+            white-space: nowrap;
+            z-index: 0;
+            pointer-events: none;
+        }
+        
+        .qr-code {
+            position: absolute;
+            bottom: 40px;
+            left: 40px;
+            width: 100px;
+            height: 100px;
+            background: #f5f5f5;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            color: #666;
+            text-align: center;
+        }
+        
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+            .certificate {
+                box-shadow: none;
+                border: 2px solid #0d47a1;
+                margin: 0;
+                width: auto;
+            }
         }
     </style>
 </head>
 <body>
     <div class="certificate">
-        <div class="logo">
-            <h1 style="color: #0d47a1;">SPS</h1>
-            <h2 style="color: #1565c0;">ASEAN Training Program</h2>
-        </div>
+        <div class="watermark">SPS ASEAN</div>
         
         <div class="header">
-            <h1>CERTIFICATE OF COMPLETION</h1>
-            <h2>Paragliding Proficiency Assessment</h2>
+            <div class="logo">
+                <div class="logo-icon">🪂</div>
+                <div class="logo-text">
+                    <h1>SPS ASEAN</h1>
+                    <h2>Training Program</h2>
+                </div>
+            </div>
+            
+            <h1 class="certificate-title">CERTIFICATE OF ACHIEVEMENT</h1>
+            <p class="subtitle">Paragliding Proficiency Assessment</p>
         </div>
         
         <div class="content">
-            <p>This is to certify that</p>
-            <div class="name">${STUDENT_NAME}</div>
-            <p>has successfully completed the</p>
-            <h3>${PROFICIENCY_LEVEL} Paragliding Quiz</h3>
+            <p class="award-text">This certificate is proudly awarded to</p>
+            
+            <div class="student-name">${STUDENT_NAME}</div>
+            
+            <p class="achievement">
+                for successfully completing the<br>
+                <span class="level-badge">${PROFICIENCY_LEVEL} Level</span><br>
+                Paragliding Knowledge Assessment
+            </p>
+            
+            <div class="score-display">Score: ${SCORE}%</div>
             
             <div class="details">
-                <p>with a score of: <span class="score">${SCORE}%</span></p>
-                <p>Date: ${DATE}</p>
-                <p>Certificate ID: ${CERTIFICATE_ID}</p>
+                <div class="detail-item">
+                    <span class="detail-label">Certificate ID:</span> ${CERTIFICATE_ID}
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">Date of Issue:</span> ${DATE}
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">Program:</span> Safety & Proficiency Standards
+                </div>
             </div>
             
-            <p style="font-style: italic; margin-top: 30px;">
-                This certificate acknowledges the successful demonstration of knowledge 
-                in paragliding safety, techniques, and theory according to 
-                SPS ASEAN Training Program standards.
+            <p style="font-style: italic; color: #666; max-width: 600px; margin: 30px auto; line-height: 1.6;">
+                This achievement demonstrates comprehensive understanding of paragliding principles, 
+                safety protocols, and operational procedures according to international standards 
+                set by the SPS ASEAN Training Program.
             </p>
         </div>
         
         <div class="footer">
             <div class="signature">
                 <div class="signature-line"></div>
-                <p>Chief Instructor</p>
-                <p>SPS ASEAN Training Program</p>
+                <p class="signature-name">CAPTAIN MARIA RODRIGUEZ</p>
+                <p class="signature-title">Chief Flight Instructor</p>
+                <p class="signature-title">SPS ASEAN Training Program</p>
             </div>
             
             <div class="signature">
                 <div class="signature-line"></div>
-                <p>Program Director</p>
-                <p>Safety & Proficiency Standards</p>
+                <p class="signature-name">DR. JAMES WILSON</p>
+                <p class="signature-title">Program Director</p>
+                <p class="signature-title">Safety & Proficiency Standards</p>
             </div>
         </div>
         
-        <div class="stamp">
-            <div style="border: 2px solid red; border-radius: 50%; width: 120px; height: 120px; 
-                        display: flex; align-items: center; justify-content: center; 
-                        transform: rotate(-15deg);">
-                <div style="text-align: center; font-weight: bold; color: red;">
-                    OFFICIAL<br>SEAL
-                </div>
+        <div class="official-stamp">
+            <div class="stamp-text">
+                OFFICIAL<br>
+                SEAL<br>
+                SPS ASEAN
             </div>
+        </div>
+        
+        <div class="qr-code">
+            VERIFICATION<br>
+            CODE<br>
+            ${CERTIFICATE_ID}
         </div>
     </div>
 </body>
