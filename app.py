@@ -1,17 +1,14 @@
-# app.py - With QR Code Upload Feature
+# app.py - With QR Code Center Placement and "test" instead of "quiz"
 import streamlit as st
 import random
 import datetime
 from quiz_data import quiz_data
 import base64
 import html
-import os
-from PIL import Image
-import io
 
 # Page configuration
 st.set_page_config(
-    page_title="SPS ASEAN Paragliding Quiz",
+    page_title="SPS ASEAN Paragliding Test",
     layout="wide",
     initial_sidebar_state="expanded"
 )
@@ -81,8 +78,8 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # Initialize session state
-if 'quiz_started' not in st.session_state:
-    st.session_state.quiz_started = False
+if 'test_started' not in st.session_state:
+    st.session_state.test_started = False
 if 'current_question' not in st.session_state:
     st.session_state.current_question = 0
 if 'answers' not in st.session_state:
@@ -93,8 +90,8 @@ if 'student_name' not in st.session_state:
     st.session_state.student_name = ""
 if 'proficiency_level' not in st.session_state:
     st.session_state.proficiency_level = "beginner"
-if 'quiz_completed' not in st.session_state:
-    st.session_state.quiz_completed = False
+if 'test_completed' not in st.session_state:
+    st.session_state.test_completed = False
 if 'qr_code_uploaded' not in st.session_state:
     st.session_state.qr_code_uploaded = False
 if 'qr_code_data' not in st.session_state:
@@ -121,15 +118,15 @@ def generate_certificate(name, level, score, qr_code_data=None):
     if qr_code_data and st.session_state.custom_qr_used:
         # Convert uploaded image to base64
         qr_base64 = base64.b64encode(qr_code_data).decode()
-        qr_html = f'<img src="data:image/png;base64,{qr_base64}" style="width: 100px; height: 100px; object-fit: contain;">'
+        qr_html = f'<img src="data:image/png;base64,{qr_base64}" style="width: 150px; height: 150px; object-fit: contain; border: 1px solid #ddd; border-radius: 8px; padding: 5px; background: white; box-shadow: 0 3px 10px rgba(0,0,0,0.1);">'
         certificate = certificate.replace("${QR_CODE}", qr_html)
     else:
         # Use default QR code placeholder
         qr_html = f'''
-        <div style="background: #f5f5f5; border-radius: 10px; padding: 10px; text-align: center; font-size: 10px; width: 100px; height: 100px; display: flex; flex-direction: column; justify-content: center; align-items: center;">
-            <div style="font-weight: bold; margin-bottom: 5px;">VERIFICATION</div>
-            <div>CODE</div>
-            <div style="font-size: 9px; margin-top: 5px;">{cert_id}</div>
+        <div style="width: 150px; height: 150px; background: #f5f5f5; border-radius: 10px; border: 1px solid #ddd; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 10px; box-shadow: 0 3px 10px rgba(0,0,0,0.1);">
+            <div style="font-weight: bold; font-size: 12px; margin-bottom: 5px; color: #333;">VERIFICATION CODE</div>
+            <div style="font-size: 11px; color: #666; margin-bottom: 5px;">${cert_id}</div>
+            <div style="font-size: 10px; color: #888; margin-top: 5px;">Scan for verification</div>
         </div>
         '''
         certificate = certificate.replace("${QR_CODE}", qr_html)
@@ -199,9 +196,9 @@ def display_question(question_data, question_num, total_questions):
                 st.session_state.current_question += 1
                 st.rerun()
         else:
-            if st.button("Submit Quiz"):
+            if st.button("Submit Test"):
                 calculate_score()
-                st.session_state.quiz_completed = True
+                st.session_state.test_completed = True
                 st.rerun()
 
 def calculate_score():
@@ -220,14 +217,14 @@ def calculate_score():
 
 def main():
     # Header
-    st.markdown('<div class="main-header"><h1>SPS ASEAN Paragliding Training Program</h1><h3>Interactive Knowledge Assessment Quiz</h3></div>', unsafe_allow_html=True)
+    st.markdown('<div class="main-header"><h1>SPS ASEAN Paragliding Training Program</h1><h3>Interactive Knowledge Assessment Test</h3></div>', unsafe_allow_html=True)
     
     # Sidebar
     with st.sidebar:
-        st.markdown("### Quiz Navigation")
+        st.markdown("### Test Navigation")
         
-        if not st.session_state.quiz_started:
-            st.info("Please enter your details and start the quiz.")
+        if not st.session_state.test_started:
+            st.info("Please enter your details and start the test.")
         else:
             level = st.session_state.proficiency_level
             badge_class = "beginner-badge" if level == "beginner" else "progressive-badge"
@@ -249,7 +246,7 @@ def main():
         st.markdown("---")
         st.markdown("### About")
         st.info("""
-        This quiz is part of the SPS ASEAN Training Program.
+        This test is part of the SPS ASEAN Training Program.
         
         **Features:**
         - AI-powered guidance
@@ -260,9 +257,9 @@ def main():
         """)
     
     # Main content area
-    if not st.session_state.quiz_started:
+    if not st.session_state.test_started:
         # Registration form
-        st.markdown("### Welcome to the Paragliding Proficiency Quiz")
+        st.markdown("### Welcome to the Paragliding Proficiency Test")
         
         col1, col2 = st.columns(2)
         
@@ -286,20 +283,20 @@ def main():
         
         st.markdown(level_desc[st.session_state.proficiency_level])
         
-        if st.button("Start Quiz", type="primary", use_container_width=True):
+        if st.button("Start Test", type="primary", use_container_width=True):
             if st.session_state.student_name.strip():
-                st.session_state.quiz_started = True
+                st.session_state.test_started = True
                 st.session_state.current_question = 0
                 st.session_state.answers = {}
                 st.session_state.score = 0
-                st.session_state.quiz_completed = False
+                st.session_state.test_completed = False
                 st.rerun()
             else:
-                st.error("Please enter your name to start the quiz.")
+                st.error("Please enter your name to start the test.")
     
-    elif st.session_state.quiz_completed:
+    elif st.session_state.test_completed:
         # Results page
-        st.markdown("## Quiz Completed!")
+        st.markdown("## Test Completed!")
         st.markdown(f'<div class="score-display">Your Score: {st.session_state.score}%</div>', unsafe_allow_html=True)
         
         # Detailed results
@@ -330,11 +327,11 @@ def main():
         # QR Code Upload Section
         st.markdown('<div class="qr-upload-section">', unsafe_allow_html=True)
         st.markdown("#### Custom QR Code (Optional)")
-        st.markdown("Upload a custom QR code image to display on your certificate. Recommended size: 100x100 pixels.")
+        st.markdown("Upload a custom QR code image to display on your certificate. Recommended size: 150x150 pixels.")
         
         uploaded_file = st.file_uploader(
             "Choose a QR code image",
-            type=['png', 'jpg', 'jpeg'],
+            type=['png', 'jpg', 'jpeg', 'svg'],
             key="qr_uploader"
         )
         
@@ -379,14 +376,14 @@ def main():
             
             # Display certificate preview
             with st.expander("Certificate Preview"):
-                st.components.v1.html(certificate_html, height=600, scrolling=True)
+                st.components.v1.html(certificate_html, height=700, scrolling=True)
         
         # Action buttons
         col1, col2 = st.columns(2)
         with col1:
-            if st.button("Take Another Quiz"):
-                st.session_state.quiz_started = False
-                st.session_state.quiz_completed = False
+            if st.button("Take Another Test"):
+                st.session_state.test_started = False
+                st.session_state.test_completed = False
                 st.session_state.qr_code_uploaded = False
                 st.session_state.qr_code_data = None
                 st.session_state.custom_qr_used = False
@@ -396,7 +393,7 @@ def main():
                 st.info("Statistics feature coming soon!")
     
     else:
-        # Quiz in progress
+        # Test in progress
         level = st.session_state.proficiency_level
         questions = quiz_data[level]["questions"]
         current_q = st.session_state.current_question
@@ -405,9 +402,9 @@ def main():
         if current_q < len(questions):
             display_question(questions[current_q], current_q, len(questions))
         else:
-            st.error("Quiz error: Question not found")
+            st.error("Test error: Question not found")
             if st.button("Return to Start"):
-                st.session_state.quiz_started = False
+                st.session_state.test_started = False
                 st.rerun()
 
 if __name__ == "__main__":
