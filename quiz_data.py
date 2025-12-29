@@ -137,7 +137,7 @@ quiz_data = {
             },
             {
                 "id": 13,
-                "question": "What part is indicated by C (the orange line)?",
+                "question": "What part in a paraglider is an internal fabric support that runs diagonally across the cells?",
                 "options": ["A cell", "A top line", "A diagonal rib", "A stabilo"],
                 "correct": 2,
                 "explanation": "Diagonal ribs provide structural support and help maintain the wing's aerofoil shape across the span of the canopy."
