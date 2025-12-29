@@ -1,10 +1,9 @@
-# app.py - Enhanced UI Version
+# app.py - Enhanced UI Version (Fixed)
 import streamlit as st
 import random
 import datetime
 from quiz_data import quiz_data
 import base64
-from io import BytesIO
 import html
 
 # Page configuration
@@ -227,18 +226,6 @@ st.markdown("""
         background: linear-gradient(45deg, #FF9800, #FF5722) !important;
         font-size: 1.1rem !important;
         padding: 1rem 2rem !important;
-    }
-    
-    /* Floating Elements */
-    .paraglider-icon {
-        position: absolute;
-        font-size: 2rem;
-        animation: floatIcon 3s ease-in-out infinite;
-    }
-    
-    @keyframes floatIcon {
-        0%, 100% { transform: translateY(0) rotate(0deg); }
-        50% { transform: translateY(-10px) rotate(5deg); }
     }
 </style>
 """, unsafe_allow_html=True)
@@ -497,8 +484,8 @@ def main():
         
         st.markdown("---")
         
-        # Start quiz button with animation
-        if st.button("🚀 Start Assessment Now", type="primary", use_container_width=True, use_container_width=True):
+        # Start quiz button with animation - FIXED: removed duplicate parameter
+        if st.button("🚀 Start Assessment Now", type="primary", use_container_width=True):
             if st.session_state.student_name.strip():
                 st.session_state.quiz_started = True
                 st.session_state.current_question = 0
@@ -555,12 +542,9 @@ def main():
             user_answer = st.session_state.answers.get(answer_key)
             is_correct = user_answer == question['correct']
             
-            result_class = "result-correct" if is_correct else "result-incorrect"
-            result_icon = "✅" if is_correct else "❌"
-            
-            with st.expander(f"{result_icon} Question {i+1}: {question['question'][:50]}..."):
+            with st.expander(f"{'✅' if is_correct else '❌'} Question {i+1}: {question['question'][:50]}..."):
                 st.markdown(f"""
-                <div style="padding: 1rem; border-radius: 10px; {'' if is_correct else ''}">
+                <div style="padding: 1rem; border-radius: 10px; {'background: #E8F5E9;' if is_correct else 'background: #FFEBEE;'}">
                     <h4>Your Answer: {question['options'][user_answer] if user_answer is not None else 'Not answered'}</h4>
                     <h4 style="color: {'#4CAF50' if is_correct else '#F44336'}">
                         Correct Answer: {question['options'][question['correct']]}
