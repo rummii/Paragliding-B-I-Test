@@ -1,4 +1,4 @@
-<!-- certificate_template.html - Enhanced Version -->
+<!-- certificate_template.html - Professional Version -->
 <!DOCTYPE html>
 <html>
 <head>
@@ -248,6 +248,26 @@
             white-space: nowrap;
             z-index: 0;
             pointer-events: none;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            width: 100%;
+        }
+        
+        .watermark-text {
+            font-family: 'Playfair Display', serif;
+            font-size: 80px;
+            letter-spacing: 10px;
+            line-height: 1.2;
+        }
+        
+        .watermark-subtext {
+            font-size: 30px;
+            letter-spacing: 15px;
+            margin-top: 10px;
+            font-weight: 700;
         }
         
         .qr-code {
@@ -264,6 +284,39 @@
             font-size: 12px;
             color: #666;
             text-align: center;
+            padding: 5px;
+            box-sizing: border-box;
+        }
+        
+        .logo-watermark {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            opacity: 0.05;
+            z-index: 0;
+            pointer-events: none;
+            max-width: 600px;
+            max-height: 400px;
+            filter: grayscale(100%);
+        }
+        
+        .logo-watermark-text {
+            font-family: 'Playfair Display', serif;
+            font-size: 100px;
+            font-weight: 900;
+            color: rgba(13, 71, 161, 0.1);
+            text-align: center;
+            letter-spacing: 15px;
+            line-height: 1.2;
+        }
+        
+        .logo-watermark-subtext {
+            font-size: 40px;
+            letter-spacing: 20px;
+            margin-top: 20px;
+            font-weight: 700;
+            color: rgba(21, 101, 192, 0.1);
         }
         
         @media print {
@@ -277,16 +330,22 @@
                 margin: 0;
                 width: auto;
             }
+            .logo-watermark {
+                opacity: 0.03;
+            }
         }
     </style>
 </head>
 <body>
     <div class="certificate">
-        <div class="watermark">SPS ASEAN</div>
+        <!-- SPS ASEAN Logo Watermark -->
+        <div class="logo-watermark">
+            <div class="logo-watermark-text">SPS</div>
+            <div class="logo-watermark-subtext">ASEAN</div>
+        </div>
         
         <div class="header">
             <div class="logo">
-                <div class="logo-icon">🪂</div>
                 <div class="logo-text">
                     <h1>SPS ASEAN</h1>
                     <h2>Training Program</h2>
@@ -332,14 +391,14 @@
         <div class="footer">
             <div class="signature">
                 <div class="signature-line"></div>
-                <p class="signature-name">Ahmad Sayeed</p>
+                <p class="signature-name">AHMAD SAYEED</p>
                 <p class="signature-title">Instructor</p>
                 <p class="signature-title">SPS ASEAN Training Program</p>
             </div>
             
             <div class="signature">
                 <div class="signature-line"></div>
-                <p class="signature-name">Lance Rivera</p>
+                <p class="signature-name">LANCE RIVERA</p>
                 <p class="signature-title">Instructor</p>
                 <p class="signature-title">Safety & Proficiency Standards</p>
             </div>
