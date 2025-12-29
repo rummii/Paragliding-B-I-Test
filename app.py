@@ -10,7 +10,7 @@ import html
 
 # Page configuration
 st.set_page_config(
-    page_title="SPS ASEAN Paragliding Quiz",
+    page_title="SPS ASSESMENT",
     layout="wide",
     initial_sidebar_state="expanded"
 )
@@ -196,7 +196,7 @@ def main():
         st.markdown("### Quiz Navigation")
         
         if not st.session_state.quiz_started:
-            st.info("Please enter your details and start the quiz.")
+            st.info("Please enter your details and start the assesment.")
         else:
             level = st.session_state.proficiency_level
             badge_class = "beginner-badge" if level == "beginner" else "progressive-badge"
@@ -230,7 +230,7 @@ def main():
     # Main content area
     if not st.session_state.quiz_started:
         # Registration form
-        st.markdown("### Welcome to the Paragliding Proficiency Quiz")
+        st.markdown("### Welcome to the Paragliding Proficiency Assesment")
         
         col1, col2 = st.columns(2)
         
