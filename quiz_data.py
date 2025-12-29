@@ -1,4 +1,4 @@
-# quiz_data.py
+# quiz_data.py - Complete version with all questions
 quiz_data = {
     "beginner": {
         "title": "Beginner Paraglider Pilot Quiz",
@@ -52,8 +52,7 @@ quiz_data = {
                 "options": [
                     "The wing collapses.",
                     "The glider will enter a deep stall.",
-                    "Nothing, you can fly as slow as you want.",
-                    "A paraglider glides down through the air. But at what speed?"
+                    "Nothing, you can fly as slow as you want."
                 ],
                 "correct": 1,
                 "explanation": "Flying below minimum speed can cause the glider to enter a deep stall, where it becomes unstable and may not respond normally to control inputs."
@@ -96,7 +95,7 @@ quiz_data = {
             },
             {
                 "id": 9,
-                "question": "During daily inspections you notice a tear of about 2.5cm or one inch in the canopy of your paraglider. What do you do?",
+                "question": "During daily inspections you notice a tear of about 2.5cm or one inch in the canopy of your paraglider. What do you do?\n1. You fix the tear with ripstop tape on both sides of the fabric.\n2. You take the glider to a dealer or manufacturer to have it professionally repaired.",
                 "options": [
                     "1 is correct.",
                     "2 is correct.",
@@ -112,6 +111,84 @@ quiz_data = {
                 "options": ["A-risers", "B-risers", "C-risers", "D-risers"],
                 "correct": 0,
                 "explanation": "A-risers connect to the leading edge lines and control the angle of attack. They're crucial for speed control and stall prevention."
+            },
+            {
+                "id": 11,
+                "question": "For a paraglider in the mountains, what wind speeds are considered safe to fly?",
+                "options": [
+                    "Only nil winds from 0 to 1 Bft.",
+                    "Only light winds from 2 to 3 Bft.",
+                    "Only with wind from 0 up to 3 Bft.",
+                    "Only with wind speeds over 3 Bft."
+                ],
+                "correct": 1,
+                "explanation": "Light winds (2-3 Bft, approximately 6-20 km/h) are generally considered safe for mountain flying. Stronger winds can create dangerous turbulence and difficult landing conditions."
+            },
+            {
+                "id": 12,
+                "question": "What happens when you brake a paraglider so much that the air speed falls below the minimum speed of about 25km/h?",
+                "options": [
+                    "The glider stalls, ie it doesn't fly anymore.",
+                    "The glider will fly on as slow as you want.",
+                    "The glider collapses."
+                ],
+                "correct": 0,
+                "explanation": "When airspeed falls below minimum speed (stall speed), the wing loses lift and stalls. Recovery requires releasing brakes to regain speed."
+            },
+            {
+                "id": 13,
+                "question": "What part is indicated by C (the orange line)?",
+                "options": ["A cell", "A top line", "A diagonal rib", "A stabilo"],
+                "correct": 2,
+                "explanation": "Diagonal ribs provide structural support and help maintain the wing's aerofoil shape across the span of the canopy."
+            },
+            {
+                "id": 14,
+                "question": "Standing on launch you see a rain shower approaching. Do you take off?",
+                "options": [
+                    "No, flying in the rain is illegal under air law.",
+                    "Yes, paragliders are not affected by rain and the accompanying wind will dry the paraglider quickly.",
+                    "Yes, if you can be sure that you have landed before the rain shower arrives.",
+                    "No, rain showers are often accompanied by wind gusts, which can be very dangerous for paragliders. Additionally, a wet canopy is more dangerous to fly."
+                ],
+                "correct": 3,
+                "explanation": "Rain showers bring unpredictable wind gusts and turbulence. Wet canopies can experience reduced performance, increased weight, and altered flight characteristics."
+            },
+            {
+                "id": 15,
+                "question": "How tight do you need to pull the leg straps of the harness?",
+                "options": [
+                    "As tight as possible so you won't fall out of the harness and you won't move from side to side in a turn.",
+                    "As loose as they will go so you can easily accelerate during take-off and the circulation in your legs is not hindered.",
+                    "That doesn't matter, as long as the buckles are secure.",
+                    "They need to be loose enough that your flat hand can just fit between the straps and your legs. That way your movements aren't hindered too much and you can still get into the harness easily after take-off."
+                ],
+                "correct": 3,
+                "explanation": "Proper leg strap tension allows one flat hand to fit between strap and leg. This provides security while allowing blood circulation and movement freedom."
+            },
+            {
+                "id": 16,
+                "question": "Which pre-launch check is the most important?",
+                "options": [
+                    "Checking the lines and canopy are laid out cleanly.",
+                    "Checking your flight instruments.",
+                    "Checking your leg straps are fastened.",
+                    "Checking if there is sufficient thermal activity."
+                ],
+                "correct": 2,
+                "explanation": "Fastening leg straps is the most critical pre-launch check. An unfastened harness could lead to falling out during flight, which is potentially fatal."
+            },
+            {
+                "id": 17,
+                "question": "You just landed. What do you do?",
+                "options": [
+                    "You bundle up the glider in a 'field pack' and take the shortest way to the designated packing area.",
+                    "You bundle up the glider in a 'field pack' and take the shortest way to the edge of the field and from there to the designated packing area.",
+                    "You report to the instructor. When he or she says it's ok, you bundle up the glider in a 'field pack' and walk to the designated packing area.",
+                    "You pack up your vulnerable glider on the spot and then you report to the instructor."
+                ],
+                "correct": 2,
+                "explanation": "After landing, first report to the instructor for debriefing and permission to pack up. Then create a field pack and walk to the designated packing area without dragging the glider."
             }
         ]
     },
@@ -199,13 +276,51 @@ quiz_data = {
             },
             {
                 "id": 8,
+                "question": "What is the name of the line indicated with G in this illustration?",
+                "options": ["Main line", "Top line", "Brake line", "Stabilo line"],
+                "correct": 3,
+                "explanation": "Stabilo lines help maintain the wing's stability and are part of the internal line structure connecting various parts of the canopy."
+            },
+            {
+                "id": 9,
                 "question": "Which of these instruments is suitable to measure groundspeed?",
                 "options": ["GPS", "TAS", "Anemometer", "Variometer"],
                 "correct": 0,
                 "explanation": "GPS measures groundspeed directly by tracking position changes over time relative to the ground. Anemometers measure airspeed, not groundspeed."
             },
             {
-                "id": 9,
+                "id": 10,
+                "question": "You are flying on tow when suddenly the tow line snaps somewhere down low. Do you keep flying with the rest of the line still attached to your harness?",
+                "options": [
+                    "Yes, you can ignore the line because it doesn't influence the flying characteristics of your paraglider.",
+                    "No, because the weight of the line will drag you down.",
+                    "No, because the friction of the line over the ground will pull you down.",
+                    "No, because the line can get stuck on an object such as a tree or a pole."
+                ],
+                "correct": 3,
+                "explanation": "A dangling tow line can snag on obstacles, causing sudden and potentially dangerous pulls on the glider. It should be released if possible."
+            },
+            {
+                "id": 11,
+                "question": "After take-off you notice that you need to pull quite a bit of right brake to ensure the paraglider flies straight ahead. What is going on?",
+                "options": [
+                    "There is a strong wind from the right.",
+                    "There is a strong wind from the left.",
+                    "You have a knot in the C-lines on the right side.",
+                    "You have a knot in the C-lines on the left side."
+                ],
+                "correct": 3,
+                "explanation": "A knot in the C-lines on one side effectively shortens those lines, causing asymmetric drag that requires opposite brake input to compensate."
+            },
+            {
+                "id": 12,
+                "question": "Which distance must a paraglider keep with respect to other aircraft?",
+                "options": ["Enough distance", "At least 50m", "At least 150m", "At least 300m"],
+                "correct": 2,
+                "explanation": "International air regulations typically require paragliders to maintain at least 150m separation from other aircraft for safety."
+            },
+            {
+                "id": 13,
                 "question": "What is the air pressure at sea level and how does the air pressure change with altitude?",
                 "options": [
                     "It can vary by more than 100hPa at sea level and is halved every 3500m.",
@@ -217,7 +332,26 @@ quiz_data = {
                 "explanation": "Standard sea level pressure is 1013.25 hPa, and pressure approximately halves every 5.5km (18,000ft) due to the exponential nature of atmospheric pressure decrease."
             },
             {
-                "id": 10,
+                "id": 14,
+                "question": "What is the effect of flying at high altitudes on the descent rate of a paraglider?",
+                "options": [
+                    "The descent rate decreases with altitude.",
+                    "Altitude has no influence on the descent rate.",
+                    "The descent rate increases with altitude.",
+                    "None of the above is true."
+                ],
+                "correct": 2,
+                "explanation": "At higher altitudes, thinner air provides less lift and drag, resulting in increased sink rates and generally poorer glide performance."
+            },
+            {
+                "id": 15,
+                "question": "What is the aspect ratio of a wing with a span of 10 meters and a flat surface of 20 square meters?",
+                "options": ["0.5", "2.0", "5.0", "40"],
+                "correct": 2,
+                "explanation": "Aspect ratio = (span²) / area = (10²) / 20 = 100 / 20 = 5. Higher aspect ratios generally indicate better glide performance but less stability."
+            },
+            {
+                "id": 16,
                 "question": "What is katabatic wind?",
                 "options": [
                     "Wind that is caused by a high pressure area.",
@@ -227,6 +361,25 @@ quiz_data = {
                 ],
                 "correct": 1,
                 "explanation": "Katabatic winds occur when cold, dense air flows downhill under gravity, often at night as mountain slopes cool. The opposite (upslope) flow is anabatic wind."
+            },
+            {
+                "id": 17,
+                "question": "Which lines have the following properties: sensitive to bending, heat resistant, yellowish colour?",
+                "options": ["Dyneema lines", "Kevlar lines", "Polyester lines", "Nylon lines"],
+                "correct": 1,
+                "explanation": "Kevlar lines are known for their heat resistance, yellowish color, and sensitivity to bending fatigue. They require careful handling and regular inspection."
+            },
+            {
+                "id": 18,
+                "question": "What is the effect of an increased porosity of the canopy on the flight behavior of the paraglider?",
+                "options": [
+                    "The paraglider is more difficult to control and becomes unstable around its yaw axis.",
+                    "The flying speed increases, therefore collapses are more likely.",
+                    "The flying speed decreases independent of how much brake is applied, resulting in a flat polar curve.",
+                    "The stall speed increases as well as the risk to enter a deep stall."
+                ],
+                "correct": 0,
+                "explanation": "Increased canopy porosity allows more air to pass through the fabric, reducing pressure differential and making the wing less stable, particularly in yaw (side-to-side) movement."
             }
         ]
     }
