@@ -189,7 +189,7 @@ def calculate_score():
 
 def main():
     # Header
-    st.markdown('<div class="main-header"><h1>SPS ASEAN Paragliding Training Program</h1><h3>Interactive Knowledge Assessment Quiz</h3></div>', unsafe_allow_html=True)
+    st.markdown('<div class="main-header"><h1>SPS ASEAN Paragliding Training Program</h1><h3>Interactive Knowledge Assessment</h3></div>', unsafe_allow_html=True)
     
     # Sidebar
     with st.sidebar:
@@ -218,7 +218,7 @@ def main():
         st.markdown("---")
         st.markdown("### About")
         st.info("""
-        This quiz is part of the SPS ASEAN Training Program.
+        This assesment is part of the SPS ASEAN Training Program.
         
         **Features:**
         - AI-powered guidance
