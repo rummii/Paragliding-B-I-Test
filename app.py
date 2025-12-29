@@ -1,4 +1,4 @@
-# app.py
+# app.py - Clean version without emojis
 import streamlit as st
 import random
 import datetime
@@ -11,7 +11,6 @@ import html
 # Page configuration
 st.set_page_config(
     page_title="SPS ASEAN Paragliding Quiz",
-    page_icon="🪂",
     layout="wide",
     initial_sidebar_state="expanded"
 )
@@ -111,19 +110,19 @@ def get_ai_guidance(question_data, user_answer, correct_answer):
     guidance = ""
     
     if user_answer == correct_answer:
-        guidance += "✅ **Excellent!** You answered correctly. "
+        guidance += "**Excellent!** You answered correctly. "
     else:
-        guidance += "❌ **Let me help you understand this better.** "
+        guidance += "**Let me help you understand this better.** "
     
     guidance += question_data['explanation']
     
     # Add additional tips based on question type
     if "speed" in question_data['question'].lower():
-        guidance += "\n\n💡 **Tip:** Always remember that airspeed is more important than groundspeed for flight control."
+        guidance += "\n\n**Tip:** Always remember that airspeed is more important than groundspeed for flight control."
     elif "safety" in question_data['question'].lower() or "emergency" in question_data['question'].lower():
-        guidance += "\n\n⚠️ **Safety Reminder:** Practice emergency procedures regularly in safe conditions."
+        guidance += "\n\n**Safety Reminder:** Practice emergency procedures regularly in safe conditions."
     elif "weather" in question_data['question'].lower():
-        guidance += "\n\n🌤️ **Weather Wisdom:** Always check multiple weather sources before flying."
+        guidance += "\n\n**Weather Wisdom:** Always check multiple weather sources before flying."
     
     return guidance
 
@@ -155,7 +154,7 @@ def display_question(question_data, question_num, total_questions):
     
     with col1:
         if question_num > 0:
-            if st.button("← Previous"):
+            if st.button("Previous"):
                 st.session_state.current_question -= 1
                 st.rerun()
     
@@ -165,7 +164,7 @@ def display_question(question_data, question_num, total_questions):
     
     with col3:
         if question_num < total_questions - 1:
-            if st.button("Next →"):
+            if st.button("Next"):
                 st.session_state.current_question += 1
                 st.rerun()
         else:
@@ -190,12 +189,11 @@ def calculate_score():
 
 def main():
     # Header
-    st.markdown('<div class="main-header"><h1>🪂 SPS ASEAN Paragliding Training Program</h1><h3>Interactive Knowledge Assessment Quiz</h3></div>', unsafe_allow_html=True)
+    st.markdown('<div class="main-header"><h1>SPS ASEAN Paragliding Training Program</h1><h3>Interactive Knowledge Assessment Quiz</h3></div>', unsafe_allow_html=True)
     
     # Sidebar
     with st.sidebar:
-        st.image("https://img.icons8.com/color/96/000000/paragliding.png", width=100)
-        st.markdown("### 📋 Quiz Navigation")
+        st.markdown("### Quiz Navigation")
         
         if not st.session_state.quiz_started:
             st.info("Please enter your details and start the quiz.")
@@ -211,14 +209,14 @@ def main():
             st.caption(f"Question {st.session_state.current_question + 1} of {total_q}")
             
             # Question navigation
-            st.markdown("### 🧭 Jump to Question")
+            st.markdown("### Jump to Question")
             for i in range(total_q):
                 if st.button(f"Question {i+1}", key=f"nav_{i}", use_container_width=True):
                     st.session_state.current_question = i
                     st.rerun()
         
         st.markdown("---")
-        st.markdown("### ℹ️ About")
+        st.markdown("### About")
         st.info("""
         This quiz is part of the SPS ASEAN Training Program.
         
@@ -232,7 +230,7 @@ def main():
     # Main content area
     if not st.session_state.quiz_started:
         # Registration form
-        st.markdown("### 🎯 Welcome to the Paragliding Proficiency Quiz")
+        st.markdown("### Welcome to the Paragliding Proficiency Quiz")
         
         col1, col2 = st.columns(2)
         
@@ -256,7 +254,7 @@ def main():
         
         st.markdown(level_desc[st.session_state.proficiency_level])
         
-        if st.button("Start Quiz 🚀", type="primary", use_container_width=True):
+        if st.button("Start Quiz", type="primary", use_container_width=True):
             if st.session_state.student_name.strip():
                 st.session_state.quiz_started = True
                 st.session_state.current_question = 0
@@ -269,11 +267,11 @@ def main():
     
     elif st.session_state.quiz_completed:
         # Results page
-        st.markdown("## 🎉 Quiz Completed!")
+        st.markdown("## Quiz Completed!")
         st.markdown(f'<div class="score-display">Your Score: {st.session_state.score}%</div>', unsafe_allow_html=True)
         
         # Detailed results
-        st.markdown("### 📊 Detailed Results")
+        st.markdown("### Detailed Results")
         questions = quiz_data[st.session_state.proficiency_level]["questions"]
         
         for i, question in enumerate(questions):
@@ -286,18 +284,18 @@ def main():
                 st.markdown(f"**Q{i+1}:** {question['question']}")
             with col2:
                 if is_correct:
-                    st.success("✓ Correct")
+                    st.success("Correct")
                 else:
-                    st.error("✗ Incorrect")
+                    st.error("Incorrect")
             
             with st.expander("View explanation"):
                 st.markdown(get_ai_guidance(question, user_answer, question['correct']))
         
         # Certificate generation
         st.markdown("---")
-        st.markdown("### 🏆 Certificate of Completion")
+        st.markdown("### Certificate of Completion")
         
-        if st.button("Generate Certificate 📜"):
+        if st.button("Generate Certificate"):
             certificate_html = generate_certificate(
                 st.session_state.student_name,
                 st.session_state.proficiency_level,
@@ -306,13 +304,13 @@ def main():
             
             # Create download link for certificate
             b64 = base64.b64encode(certificate_html.encode()).decode()
-            href = f'<a href="data:text/html;base64,{b64}" download="SPS_Certificate_{st.session_state.student_name.replace(" ", "_")}.html">📥 Download Certificate</a>'
+            href = f'<a href="data:text/html;base64,{b64}" download="SPS_Certificate_{st.session_state.student_name.replace(" ", "_")}.html">Download Certificate</a>'
             st.markdown(href, unsafe_allow_html=True)
             
             # Display certificate preview
             st.components.v1.html(certificate_html, height=600, scrolling=True)
         
-        if st.button("Take Another Quiz 🔄"):
+        if st.button("Take Another Quiz"):
             st.session_state.quiz_started = False
             st.session_state.quiz_completed = False
             st.rerun()
