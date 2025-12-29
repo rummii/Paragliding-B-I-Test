@@ -1,16 +1,17 @@
-# app.py - Clean version without emojis
+# app.py - With QR Code Upload Feature
 import streamlit as st
 import random
 import datetime
-import json
 from quiz_data import quiz_data
 import base64
-from io import BytesIO
 import html
+import os
+from PIL import Image
+import io
 
 # Page configuration
 st.set_page_config(
-    page_title="SPS ASSESMENT",
+    page_title="SPS ASEAN Paragliding Quiz",
     layout="wide",
     initial_sidebar_state="expanded"
 )
@@ -69,6 +70,13 @@ st.markdown("""
         background-color: #ff9800;
         color: white;
     }
+    .qr-upload-section {
+        background-color: #f0f7ff;
+        padding: 1.5rem;
+        border-radius: 10px;
+        border: 2px dashed #0d47a1;
+        margin: 1rem 0;
+    }
 </style>
 """, unsafe_allow_html=True)
 
@@ -87,9 +95,15 @@ if 'proficiency_level' not in st.session_state:
     st.session_state.proficiency_level = "beginner"
 if 'quiz_completed' not in st.session_state:
     st.session_state.quiz_completed = False
+if 'qr_code_uploaded' not in st.session_state:
+    st.session_state.qr_code_uploaded = False
+if 'qr_code_data' not in st.session_state:
+    st.session_state.qr_code_data = None
+if 'custom_qr_used' not in st.session_state:
+    st.session_state.custom_qr_used = False
 
-def generate_certificate(name, level, score):
-    """Generate HTML certificate with student details"""
+def generate_certificate(name, level, score, qr_code_data=None):
+    """Generate HTML certificate with student details and QR code"""
     with open('certificate_template.html', 'r') as f:
         template = f.read()
     
@@ -102,6 +116,23 @@ def generate_certificate(name, level, score):
     certificate = certificate.replace("${SCORE}", str(score))
     certificate = certificate.replace("${DATE}", datetime.datetime.now().strftime("%B %d, %Y"))
     certificate = certificate.replace("${CERTIFICATE_ID}", cert_id)
+    
+    # Add QR code if provided
+    if qr_code_data and st.session_state.custom_qr_used:
+        # Convert uploaded image to base64
+        qr_base64 = base64.b64encode(qr_code_data).decode()
+        qr_html = f'<img src="data:image/png;base64,{qr_base64}" style="width: 100px; height: 100px; object-fit: contain;">'
+        certificate = certificate.replace("${QR_CODE}", qr_html)
+    else:
+        # Use default QR code placeholder
+        qr_html = f'''
+        <div style="background: #f5f5f5; border-radius: 10px; padding: 10px; text-align: center; font-size: 10px; width: 100px; height: 100px; display: flex; flex-direction: column; justify-content: center; align-items: center;">
+            <div style="font-weight: bold; margin-bottom: 5px;">VERIFICATION</div>
+            <div>CODE</div>
+            <div style="font-size: 9px; margin-top: 5px;">{cert_id}</div>
+        </div>
+        '''
+        certificate = certificate.replace("${QR_CODE}", qr_html)
     
     return certificate
 
@@ -189,14 +220,14 @@ def calculate_score():
 
 def main():
     # Header
-    st.markdown('<div class="main-header"><h1>SPS ASEAN Paragliding Training Program</h1><h3>Interactive Knowledge Assessment</h3></div>', unsafe_allow_html=True)
+    st.markdown('<div class="main-header"><h1>SPS ASEAN Paragliding Training Program</h1><h3>Interactive Knowledge Assessment Quiz</h3></div>', unsafe_allow_html=True)
     
     # Sidebar
     with st.sidebar:
         st.markdown("### Quiz Navigation")
         
         if not st.session_state.quiz_started:
-            st.info("Please enter your details and start the assesment.")
+            st.info("Please enter your details and start the quiz.")
         else:
             level = st.session_state.proficiency_level
             badge_class = "beginner-badge" if level == "beginner" else "progressive-badge"
@@ -218,19 +249,20 @@ def main():
         st.markdown("---")
         st.markdown("### About")
         st.info("""
-        This assesment is part of the SPS ASEAN Training Program.
+        This quiz is part of the SPS ASEAN Training Program.
         
         **Features:**
         - AI-powered guidance
         - Instant feedback
         - Printable certificate
         - Progress tracking
+        - Custom QR code support
         """)
     
     # Main content area
     if not st.session_state.quiz_started:
         # Registration form
-        st.markdown("### Welcome to the Paragliding Proficiency Assesment")
+        st.markdown("### Welcome to the Paragliding Proficiency Quiz")
         
         col1, col2 = st.columns(2)
         
@@ -291,15 +323,53 @@ def main():
             with st.expander("View explanation"):
                 st.markdown(get_ai_guidance(question, user_answer, question['correct']))
         
-        # Certificate generation
+        # Certificate section with QR code upload
         st.markdown("---")
         st.markdown("### Certificate of Completion")
         
+        # QR Code Upload Section
+        st.markdown('<div class="qr-upload-section">', unsafe_allow_html=True)
+        st.markdown("#### Custom QR Code (Optional)")
+        st.markdown("Upload a custom QR code image to display on your certificate. Recommended size: 100x100 pixels.")
+        
+        uploaded_file = st.file_uploader(
+            "Choose a QR code image",
+            type=['png', 'jpg', 'jpeg'],
+            key="qr_uploader"
+        )
+        
+        if uploaded_file is not None:
+            # Read the uploaded file
+            qr_code_data = uploaded_file.read()
+            st.session_state.qr_code_data = qr_code_data
+            st.session_state.qr_code_uploaded = True
+            
+            # Display preview
+            col1, col2 = st.columns([1, 3])
+            with col1:
+                st.image(uploaded_file, caption="QR Code Preview", width=150)
+            with col2:
+                st.success("QR code uploaded successfully!")
+                if st.button("Use This QR Code", key="use_qr"):
+                    st.session_state.custom_qr_used = True
+                    st.success("Custom QR code will be used on your certificate.")
+        
+        if st.session_state.qr_code_uploaded:
+            if st.button("Remove QR Code", key="remove_qr"):
+                st.session_state.qr_code_uploaded = False
+                st.session_state.qr_code_data = None
+                st.session_state.custom_qr_used = False
+                st.rerun()
+        
+        st.markdown('</div>', unsafe_allow_html=True)
+        
+        # Certificate generation
         if st.button("Generate Certificate"):
             certificate_html = generate_certificate(
                 st.session_state.student_name,
                 st.session_state.proficiency_level,
-                st.session_state.score
+                st.session_state.score,
+                st.session_state.qr_code_data if st.session_state.custom_qr_used else None
             )
             
             # Create download link for certificate
@@ -308,12 +378,22 @@ def main():
             st.markdown(href, unsafe_allow_html=True)
             
             # Display certificate preview
-            st.components.v1.html(certificate_html, height=600, scrolling=True)
+            with st.expander("Certificate Preview"):
+                st.components.v1.html(certificate_html, height=600, scrolling=True)
         
-        if st.button("Take Another Quiz"):
-            st.session_state.quiz_started = False
-            st.session_state.quiz_completed = False
-            st.rerun()
+        # Action buttons
+        col1, col2 = st.columns(2)
+        with col1:
+            if st.button("Take Another Quiz"):
+                st.session_state.quiz_started = False
+                st.session_state.quiz_completed = False
+                st.session_state.qr_code_uploaded = False
+                st.session_state.qr_code_data = None
+                st.session_state.custom_qr_used = False
+                st.rerun()
+        with col2:
+            if st.button("View Statistics"):
+                st.info("Statistics feature coming soon!")
     
     else:
         # Quiz in progress
