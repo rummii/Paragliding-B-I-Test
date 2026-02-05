@@ -8,8 +8,6 @@ import base64
 import html
 
 # Page configuration
-
-
 st.set_page_config(
     page_title="SPS ASEAN Paragliding Test",
     layout="wide",
@@ -18,17 +16,30 @@ st.set_page_config(
 
 footer_custom = """
     <style>
-    footer {visibility: hidden;}
+    /* Hides the standard Streamlit footer */
+    footer {visibility: hidden !important;}
+    
+    /* Hides the 'Made with Streamlit' link specifically */
+    .st-emotion-cache-zq5tm5 {display: none !important;}
+    
+    /* Hides the hamburger menu (optional) */
+    #MainMenu {visibility: hidden !important;}
+    
+    /* Hides the header decoration bar */
+    header {visibility: hidden !important;}
+
+    /* Your custom footer styling */
     .footer-custom {
         position: fixed;
         left: 0;
         bottom: 0;
         width: 100%;
-        background-color: transparent;
+        background-color: white; /* Changed from transparent to ensure it covers any ghost text */
         color: grey;
         text-align: center;
         padding: 10px;
         font-size: 12px;
+        z-index: 999; /* Ensures it stays on top */
     }
     </style>
     <div class="footer-custom">
@@ -98,17 +109,6 @@ st.markdown("""
         border: 2px dashed #0d47a1;
         margin: 1rem 0;
     }
-
-    import streamlit as st
-
-hide_style = """
-    <style>
-    #MainMenu {visibility: hidden;}
-    footer {visibility: hidden;}
-    header {visibility: hidden;}
-    </style>
-    """
-st.markdown(hide_style, unsafe_allow_html=True)
 
 </style>
 """, unsafe_allow_html=True)
