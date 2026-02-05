@@ -1,3 +1,21 @@
+
+# app.py - With QR Code Center Placement and "test" instead of "quiz"
+import streamlit as st
+import random
+import datetime
+from quiz_data import quiz_data
+import base64
+import html
+
+# Page configuration
+
+
+st.set_page_config(
+    page_title="SPS ASEAN Paragliding Test",
+    layout="wide",
+    initial_sidebar_state="expanded"
+)
+
 footer_custom = """
     <style>
     footer {visibility: hidden;}
@@ -18,20 +36,6 @@ footer_custom = """
     </div>
     """
 st.markdown(footer_custom, unsafe_allow_html=True)
-# app.py - With QR Code Center Placement and "test" instead of "quiz"
-import streamlit as st
-import random
-import datetime
-from quiz_data import quiz_data
-import base64
-import html
-
-# Page configuration
-st.set_page_config(
-    page_title="SPS ASEAN Paragliding Test",
-    layout="wide",
-    initial_sidebar_state="expanded"
-)
 
 # Custom CSS
 st.markdown("""
