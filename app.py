@@ -1,3 +1,23 @@
+footer_custom = """
+    <style>
+    footer {visibility: hidden;}
+    .footer-custom {
+        position: fixed;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        background-color: transparent;
+        color: grey;
+        text-align: center;
+        padding: 10px;
+        font-size: 12px;
+    }
+    </style>
+    <div class="footer-custom">
+        <p>© 2026 SPS ASEAN IT Division | All rights reserved</p>
+    </div>
+    """
+st.markdown(footer_custom, unsafe_allow_html=True)
 # app.py - With QR Code Center Placement and "test" instead of "quiz"
 import streamlit as st
 import random
