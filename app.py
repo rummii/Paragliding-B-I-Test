@@ -14,37 +14,53 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
+# Place this immediately after st.set_page_config
 st.markdown("""
     <style>
-    /* Hides the entire footer container */
-    [data-testid="stFooter"] {display: none !important;}
-    
-    /* Hides the status widget (bottom right) */
-    [data-testid="stStatusWidget"] {display: none !important;}
-    
-    /* Hides the decoration bar at the top */
-    [data-testid="stHeader"] {display: none !important;}
+    /* 1. Hide the entire footer container */
+    [data-testid="stFooter"] {
+        display: none !important;
+        vertical-align: hidden !important;
+        visibility: hidden !important;
+    }
 
-    /* Force your custom footer to be on top of everything */
+    /* 2. Hide the status widget and any cloud-injected branding */
+    [data-testid="stStatusWidget"] {
+        display: none !important;
+        visibility: hidden !important;
+    }
+
+    /* 3. Target the specific link text just in case */
+    footer {
+        visibility: hidden !important;
+        height: 0% !important;
+    }
+
+    /* 4. Your Custom SPS Footer */
     .footer-custom {
         position: fixed;
         left: 0;
         bottom: 0;
         width: 100%;
-        background-color: white;
-        color: #555;
+        background-color: white; 
+        color: #666666;
         text-align: center;
-        padding: 5px;
+        padding: 8px;
         font-size: 12px;
-        z-index: 999999;
-        border-top: 1px solid #eee;
+        font-family: sans-serif;
+        z-index: 9999;
+        border-top: 1px solid #eaeaea;
+    }
+    
+    /* 5. Adjusting the main container to not be hidden by your new footer */
+    .main .block-container {
+        padding-bottom: 50px;
     }
     </style>
     <div class="footer-custom">
-        <p>© 2026 SPS ASEAN IT Division | All rights reserved</p>
+        © 2026 SPS ASEAN IT Division | All rights reserved
     </div>
 """, unsafe_allow_html=True)
-
 # Custom CSS
 st.markdown("""
 <style>
