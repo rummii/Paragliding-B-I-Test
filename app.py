@@ -16,6 +16,17 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
+import streamlit as st
+
+hide_style = """
+    <style>
+    #MainMenu {visibility: hidden;}
+    footer {visibility: hidden;}
+    header {visibility: hidden;}
+    </style>
+    """
+st.markdown(hide_style, unsafe_allow_html=True)
+
 footer_custom = """
     <style>
     footer {visibility: hidden;}
