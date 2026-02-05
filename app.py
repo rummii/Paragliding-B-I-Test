@@ -14,47 +14,42 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-# Place this immediately after st.set_page_config
 st.markdown("""
     <style>
-    /* 1. Hide the entire footer container */
+    /* 1. Hides the "View Profile" / "Manage App" toolbar in the bottom right */
+    [data-testid="stToolbar"] {
+        display: none !important;
+        visibility: hidden !important;
+    }
+
+    /* 2. Hides the "Made with Streamlit" footer */
     [data-testid="stFooter"] {
         display: none !important;
-        vertical-align: hidden !important;
-        visibility: hidden !important;
     }
 
-    /* 2. Hide the status widget and any cloud-injected branding */
+    /* 3. Hides the Status Widget (running/loading icons) */
     [data-testid="stStatusWidget"] {
         display: none !important;
+    }
+
+    /* 4. Hides the hamburger menu in the top right */
+    #MainMenu {
         visibility: hidden !important;
     }
 
-    /* 3. Target the specific link text just in case */
-    footer {
-        visibility: hidden !important;
-        height: 0% !important;
-    }
-
-    /* 4. Your Custom SPS Footer */
+    /* 5. Your Custom SPS Footer */
     .footer-custom {
         position: fixed;
         left: 0;
         bottom: 0;
         width: 100%;
-        background-color: white; 
-        color: #666666;
+        background-color: white;
+        color: #666;
         text-align: center;
         padding: 8px;
         font-size: 12px;
-        font-family: sans-serif;
-        z-index: 9999;
+        z-index: 999999;
         border-top: 1px solid #eaeaea;
-    }
-    
-    /* 5. Adjusting the main container to not be hidden by your new footer */
-    .main .block-container {
-        padding-bottom: 50px;
     }
     </style>
     <div class="footer-custom">
