@@ -14,39 +14,36 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-footer_custom = """
+st.markdown("""
     <style>
-    /* Hides the standard Streamlit footer */
-    footer {visibility: hidden !important;}
+    /* Hides the entire footer container */
+    [data-testid="stFooter"] {display: none !important;}
     
-    /* Hides the 'Made with Streamlit' link specifically */
-    .st-emotion-cache-zq5tm5 {display: none !important;}
+    /* Hides the status widget (bottom right) */
+    [data-testid="stStatusWidget"] {display: none !important;}
     
-    /* Hides the hamburger menu (optional) */
-    #MainMenu {visibility: hidden !important;}
-    
-    /* Hides the header decoration bar */
-    header {visibility: hidden !important;}
+    /* Hides the decoration bar at the top */
+    [data-testid="stHeader"] {display: none !important;}
 
-    /* Your custom footer styling */
+    /* Force your custom footer to be on top of everything */
     .footer-custom {
         position: fixed;
         left: 0;
         bottom: 0;
         width: 100%;
-        background-color: white; /* Changed from transparent to ensure it covers any ghost text */
-        color: grey;
+        background-color: white;
+        color: #555;
         text-align: center;
-        padding: 10px;
+        padding: 5px;
         font-size: 12px;
-        z-index: 999; /* Ensures it stays on top */
+        z-index: 999999;
+        border-top: 1px solid #eee;
     }
     </style>
     <div class="footer-custom">
         <p>© 2026 SPS ASEAN IT Division | All rights reserved</p>
     </div>
-    """
-st.markdown(footer_custom, unsafe_allow_html=True)
+""", unsafe_allow_html=True)
 
 # Custom CSS
 st.markdown("""
